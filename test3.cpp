@@ -19,7 +19,7 @@ pair<bool, int> findDuplicated1(vector<int>& vi)
 
 }
 
-pair<bool, int> findDuplicated2(const vector<int>& vi)
+int findDuplicated2(const vector<int>& vi)
 {
     if(vi.size() < 2)
         throw exception{};
@@ -51,16 +51,7 @@ pair<bool, int> findDuplicated2(const vector<int>& vi)
             mid = (left + right)/2;
         }
     }
-    cnt = 0;
-    for(const auto& num : vi)
-    {
-        if(num == mid)
-            ++cnt;
-    }
-    if(cnt > 1)
-        return {true, left};
-    else
-        return {false, 0};
+    return left; //left == mid == right;
 }
 
 int main()
@@ -78,13 +69,16 @@ int main()
     vector<int> vi5{1,2,2,3,4};
     vector<int> vi6{1,2,3,4};
     vector<int> vi7;
-    pair<bool, int> rst4 = findDuplicated2(vi4);
+    auto rst4 = findDuplicated2(vi4);
+    cout << rst4 << endl;
+
     auto rst5 = findDuplicated2(vi5);
-    auto rst6 = findDuplicated2(vi6);
-    cout << rst4.first << "  " << rst4.second << endl;
-    cout << rst5.first << "  " << rst5.second << endl;
-    cout << rst6.first << "  " << rst6.second << endl;
-    auto rst7 = findDuplicated2(vi7);
-    cout << rst7.first << "  " << rst7.second << endl;
+    cout << rst5 << endl;
+
+    auto rst6 = findDuplicated2(vi6);  //抛出异常，存在大于n的数字
+    cout << rst6 << endl;
+
+    auto rst7 = findDuplicated2(vi7);  //抛出异常，数组大小小于2
+    cout << rst7 << endl;
     return 0;
 }
